@@ -5,7 +5,7 @@ using WiredBrainCoffee.Storage.Entities;
 
 namespace WiredBrainCoffee.Storage.Repositories
 {
-    public class ListRepository<T> where T: class, IEntity
+    public class ListRepository<T>: IRepository<T> where T: IEntity
     {
         private readonly List<T> _items = new List<T>();
 
@@ -32,6 +32,7 @@ namespace WiredBrainCoffee.Storage.Repositories
         {
             _items.Remove(item);
         }
+
     }
 
 }

@@ -6,7 +6,7 @@ using WiredBrainCoffee.Storage.Entities;
 
 namespace WiredBrainCoffee.Storage.Repositories
 {
-    public class SqlRepository<T> where T : class, IEntity
+    public class SqlRepository<T> : IRepository<T> where T : class, IEntity
     {
         private readonly List<T> _items = new List<T>();
         private readonly DbContext _dbContext;

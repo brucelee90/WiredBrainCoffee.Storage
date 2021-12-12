@@ -19,14 +19,14 @@ namespace WiredBrainCoffee.Storage
             Console.ReadLine();
         }
 
-        private static void GetEmployeeById(ListRepository<Employee> employeeRepository)
+        private static void GetEmployeeById(IRepository<Employee> employeeRepository)
         {
             var id = 2;
             var employee = employeeRepository.GetById(id);
             Console.WriteLine($"Employee with Id {id} is {employee.FirstName}");
         }
 
-        private static void AddEmployees(ListRepository<Employee> employeeRepository)
+        private static void AddEmployees(IRepository<Employee> employeeRepository)
         {
             employeeRepository.Add(new Employee { FirstName = "Lee" });
             employeeRepository.Add(new Employee { FirstName = "Vincent" });
@@ -35,7 +35,7 @@ namespace WiredBrainCoffee.Storage
             employeeRepository.Save();
         }
 
-        private static void AddOrganizations(ListRepository<Organization> organizationRepository)
+        private static void AddOrganizations(IRepository<Organization> organizationRepository)
         {
             organizationRepository.Add(new Organization { Name = "CoffeeCarma" });
             organizationRepository.Add(new Organization { Name = "L4 Webdesign" });
