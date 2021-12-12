@@ -33,7 +33,7 @@ namespace WiredBrainCoffee.Storage.Repositories
 
         public void Remove(T item)
         {
-            _items.Remove(item);
+            _items.Remove(item); 
         }
 
     }
