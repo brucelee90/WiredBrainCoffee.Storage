@@ -28,10 +28,7 @@ namespace WiredBrainCoffee.Storage.Repositories
 
         public void Save()
         {
-            foreach (var employee in _items)
-            {
-                Console.WriteLine(employee);
-            }
+            // Everything is save already in the List<T>
         }
 
         public void Remove(T item)
