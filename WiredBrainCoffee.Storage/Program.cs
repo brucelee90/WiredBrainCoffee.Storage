@@ -50,19 +50,40 @@ namespace WiredBrainCoffee.Storage
 
         private static void AddEmployees(IRepository<Employee> employeeRepository)
         {
-            employeeRepository.Add(new Employee { FirstName = "Lee" });
-            employeeRepository.Add(new Employee { FirstName = "Vincent" });
-            employeeRepository.Add(new Employee { FirstName = "Klopfers" });
+            var employees = new[]
+            {
+                new Employee { FirstName = "Lee" },
+                new Employee { FirstName = "Vincent" },
+            };
 
-            employeeRepository.Save();
+            AddBatch(employees, employeeRepository);
+
         }
 
         private static void AddOrganizations(IRepository<Organization> organizationRepository)
         {
-            organizationRepository.Add(new Organization { Name = "CoffeeCarma" });
-            organizationRepository.Add(new Organization { Name = "L4 Webdesign" });
+
+            var organizations = new[]
+            {
+                new Organization { Name = "L4 Webdesign" },
+                new Organization { Name = "L4 Webdesign" }
+            };
+
+            AddBatch(organizations, organizationRepository);
 
             organizationRepository.Save();
+        }
+
+        private static void AddBatch<T>( T[] organizations, IWriteRepository<T> organizationRepository)
+        {
+
+            foreach (var organization in organizations)
+            {
+                organizationRepository.Add(organization);
+            }
+
+            organizationRepository.Save();
+
         }
     }
 }
