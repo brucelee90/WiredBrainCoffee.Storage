@@ -7,9 +7,6 @@ namespace WiredBrainCoffee.Storage.Entities
         public string? FirstName { get; set; }
 
         public override string ToString() => $"Id: {this.Id}, FirstName: {FirstName}";
-
-        
     }
 
-    
 }
