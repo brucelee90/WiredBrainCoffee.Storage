@@ -9,6 +9,12 @@ namespace WiredBrainCoffee.Storage.Repositories
     {
         private readonly List<T> _items = new List<T>();
 
+
+        public IEnumerable<T> GetAll()
+        {
+            return _items.ToList(); 
+        }
+
         public T GetById(int id)
         {
             return _items.Single(item => item.Id == id);
