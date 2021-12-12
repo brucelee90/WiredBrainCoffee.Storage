@@ -9,7 +9,8 @@ namespace WiredBrainCoffee.Storage
     {
         static void Main(string[] args)
         {
-            var employeeRepository = new SqlRepository<Employee>(new StorageAppDbContext());
+            var itemAdded = new ItemAdded(EmployeeAdded);
+            var employeeRepository = new SqlRepository<Employee>(new StorageAppDbContext(), itemAdded);
             AddEmployees(employeeRepository);
             AddManagers(employeeRepository);
             GetEmployeeById(employeeRepository);
@@ -22,12 +23,26 @@ namespace WiredBrainCoffee.Storage
             Console.ReadLine();
         }
 
+        private static void EmployeeAdded(object item)
+        {
+            var employee = (Employee)item;
+            Console.WriteLine($"Employee added {employee.FirstName}");
+        }
+
         private static void AddManagers(IWriteRepository<Manager> managerRepository)
         {
 
-            managerRepository.Add(new Manager { FirstName = "Sara" });
-            managerRepository.Add(new Manager { FirstName = "Lee" });
+            var saraManager = new Manager { FirstName = "Sara" };
+            var saraManagerCopy = saraManager.Copy();
+            managerRepository.Add(saraManager);
 
+            if (saraManagerCopy != null)
+            {
+                saraManagerCopy.FirstName += "_Copy";
+                managerRepository.Add(saraManagerCopy);
+            }
+
+            managerRepository.Add(new Manager { FirstName = "Lee" });
             managerRepository.Save();
         }
 
@@ -70,7 +85,6 @@ namespace WiredBrainCoffee.Storage
             };
 
             organizationRepository.AddBatch(organizations);
-
             organizationRepository.Save();
         }
     }
